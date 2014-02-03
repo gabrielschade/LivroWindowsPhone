@@ -50,10 +50,10 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0">
-            <TextBox HorizontalAlignment="Left" Height="72" Margin="-10,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="344"/>
-            <Button Content="Button" HorizontalAlignment="Left" Margin="326,10,0,0" VerticalAlignment="Top" Foreground="White" Background="#FFDE4A4A"/>
-            <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,87,0,0" VerticalAlignment="Top"/>
-            <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="10,159,0,0" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Left" Height="72" Margin="0,8,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="344"/>
+            <Button Content="Button" HorizontalAlignment="Left" Margin="334,8,0,0" VerticalAlignment="Top" Foreground="White" Background="#FFDE4A4A"/>
+            <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="0,87,0,0" VerticalAlignment="Top"/>
+            <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="0,159,0,0" VerticalAlignment="Top"/>
 
         </Grid>
 
