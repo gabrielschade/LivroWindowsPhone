@@ -19,12 +19,12 @@
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="220"/>
+            <RowDefinition Height="270"/>
         </Grid.RowDefinitions>
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="180"/>
+                <RowDefinition Height="140"/>
                 <RowDefinition Height="150"/>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="*"/>
@@ -36,9 +36,9 @@
         </Grid>
 
         <StackPanel Grid.Row="3">
-            <Button>Entrar com uma conta</Button>
-            <Button>Entrar sem uma conta</Button>
-            <Button>Criar uma conta</Button>
+            <Button Style="{StaticResource LargeButton}" Background="#B2C80000" >Entrar com uma conta</Button>
+            <Button Style="{StaticResource LargeButton}" Background="#B20000C8" >Entrar sem uma conta</Button>
+            <Button Style="{StaticResource LargeButton}" Background="#BF0E6400" >Criar uma conta</Button>
         </StackPanel>
         <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
     </Grid>
