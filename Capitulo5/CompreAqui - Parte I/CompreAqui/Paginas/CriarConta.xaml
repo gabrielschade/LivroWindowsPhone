@@ -38,7 +38,7 @@
             
             <StackPanel Margin="10,0">
                 <TextBlock Style="{StaticResource PhoneTextLargeStyle}">Email</TextBlock>
-                <TextBox InputScope="EmailUserName"></TextBox>
+                <TextBox></TextBox>
                 <TextBlock Style="{StaticResource PhoneTextLargeStyle}">Usuário</TextBlock>
                 <TextBox></TextBox>
                 <TextBlock Style="{StaticResource PhoneTextLargeStyle}">Senha</TextBlock>
