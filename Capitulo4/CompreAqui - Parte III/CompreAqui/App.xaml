@@ -9,7 +9,7 @@
     <Application.Resources>
         <local:LocalizedStrings xmlns:local="clr-namespace:CompreAqui" x:Key="LocalizedStrings"/>
         
-        <Style x:Key="LargeButton" TargetType="Button">
+        <Style x:Key="BotaoSemBorda" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="{StaticResource PhoneForegroundBrush}"/>
             <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
