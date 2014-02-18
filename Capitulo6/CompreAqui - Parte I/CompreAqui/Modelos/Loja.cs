@@ -8,6 +8,25 @@ namespace CompreAqui.Modelos
 {
     public class Loja
     {
+        private Loja()
+        {}
+
+        private static Loja dados;
+        public static Loja Dados
+        {
+            get
+            {
+                if (dados == null)
+                    dados = new Loja();
+
+                return dados;
+            }
+            set
+            {
+                dados = value;
+            }
+        }
+
         public List<Produto> Produtos { get; set; }
     }
 }

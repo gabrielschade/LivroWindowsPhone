@@ -179,15 +179,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\dados.txt" />
-    <Content Include="Icons\camera.png" />
-    <Content Include="Icons\desktop.png" />
-    <Content Include="Icons\filmadora.png" />
-    <Content Include="Icons\fones.jpg" />
-    <Content Include="Icons\keyboard.ico" />
-    <Content Include="Icons\mouse.jpg" />
-    <Content Include="Icons\notebook.png" />
-    <Content Include="Icons\smartphone.jpg" />
-    <Content Include="Icons\tablet.png" />
+    <Content Include="Icones\camera.png" />
+    <Content Include="Icones\desktop.png" />
+    <Content Include="Icones\filmadora.png" />
+    <Content Include="Icones\fones.jpg" />
+    <Content Include="Icones\keyboard.ico" />
+    <Content Include="Icones\mouse.jpg" />
+    <Content Include="Icones\notebook.png" />
+    <Content Include="Icones\smartphone.jpg" />
+    <Content Include="Icones\tablet.png" />
     <Content Include="README_FIRST.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />

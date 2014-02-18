@@ -7,6 +7,9 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using CompreAqui.Resources;
+using CompreAqui.Auxiliar;
+using Newtonsoft.Json;
+using CompreAqui.Modelos;
 
 namespace CompreAqui
 {
@@ -61,6 +64,8 @@ namespace CompreAqui
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            string dados = LeitorArquivo.Ler("/CompreAqui;component/Resources/dados.txt");
+            Loja.Dados = JsonConvert.DeserializeObject<Loja>(dados);
         }
 
         // Code to execute when the application is activated (brought to foreground)
