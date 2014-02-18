@@ -1,0 +1,57 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="CompreAqui.Paginas.ProdutosHub"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideDownFadeIn" />
+            </toolkit:NavigationInTransition.Backward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+
+    <phone:Panorama Title="CompreAqui">
+        <phone:Panorama.Background>
+            <ImageBrush ImageSource="/Assets/Images/panoramaBackground.jpg"/>
+        </phone:Panorama.Background>
+
+        <phone:PanoramaItem Header="classificações">
+
+        </phone:PanoramaItem>
+
+        <phone:PanoramaItem Header="promoção">
+
+        </phone:PanoramaItem>
+
+        <phone:PanoramaItem Header="produtos">
+
+        </phone:PanoramaItem>
+
+    </phone:Panorama>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar Opacity="0.5" >
+            <shell:ApplicationBarIconButton Text="pesquisar"
+                                            IconUri="/Assets/AppBar/feature.search.png"/>
+
+
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="sua conta" Click="SuaConta_Click"/>
+            </shell:ApplicationBar.MenuItems>
+            
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>
