@@ -30,16 +30,17 @@
         </phone:Panorama.Background>
 
         <phone:PanoramaItem Header="classificações">
-            <Grid Margin="10,0">
-                <phone:LongListSelector x:Name="Categorias">
-                    <phone:LongListSelector.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Path=Descricao}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                        </DataTemplate>
-                    </phone:LongListSelector.ItemTemplate>
-                </phone:LongListSelector>
-            </Grid>
-
+            <ScrollViewer>
+                <Grid Margin="10,0">
+                    <phone:LongListSelector x:Name="Categorias">
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Descricao}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                            </DataTemplate>
+                        </phone:LongListSelector.ItemTemplate>
+                    </phone:LongListSelector>
+                </Grid>
+            </ScrollViewer>
         </phone:PanoramaItem>
 
         <phone:PanoramaItem Header="promoção">
@@ -85,54 +86,56 @@
 
 
         </phone:PanoramaItem>
-            
+
         <phone:PanoramaItem Header="produtos">
-            <Grid Margin="10,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="160"/>
-                </Grid.RowDefinitions>
+            <ScrollViewer>
+                <Grid Margin="10,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="160"/>
+                    </Grid.RowDefinitions>
 
-                <phone:LongListSelector x:Name="Produtos">
-                    <phone:LongListSelector.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Height="130" Background="#4C000000" VerticalAlignment="Top" Margin="0,5">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="130"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                    <phone:LongListSelector x:Name="Produtos">
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="130" Background="#4C000000" VerticalAlignment="Top" Margin="0,5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="130"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <Grid Background="White">
-                                    <Grid.Resources>
-                                        <converter:ImageSourceConverter x:Key="converter"/>
-                                    </Grid.Resources>
-                                    <Image Source="{Binding Path=Icone,Converter={StaticResource converter}}" Height="75" />
+                                    <Grid Background="White">
+                                        <Grid.Resources>
+                                            <converter:ImageSourceConverter x:Key="converter"/>
+                                        </Grid.Resources>
+                                        <Image Source="{Binding Path=Icone,Converter={StaticResource converter}}" Height="75" />
+                                    </Grid>
+
+                                    <Grid Grid.Column="1" Margin="10">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="90"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="{Binding Path=Descricao}" FontSize="24" TextWrapping="Wrap" Grid.RowSpan="2"/>
+
+                                        <StackPanel Orientation="Horizontal" Grid.Row="1">
+                                            <TextBlock Text="por: " VerticalAlignment="Center"/>
+                                            <TextBlock Text="{Binding Path=PrecoAPagar}" FontSize="24" VerticalAlignment="Center"/>
+                                            <TextBlock Text=" R$" FontSize="24" VerticalAlignment="Center"/>
+                                        </StackPanel>
+
+                                    </Grid>
                                 </Grid>
-
-                                <Grid Grid.Column="1" Margin="10">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="90"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Text="{Binding Path=Descricao}" FontSize="24" TextWrapping="Wrap" Grid.RowSpan="2"/>
-
-                                    <StackPanel Orientation="Horizontal" Grid.Row="1">
-                                        <TextBlock Text="por: " VerticalAlignment="Center"/>
-                                        <TextBlock Text="{Binding Path=PrecoAPagar}" FontSize="24" VerticalAlignment="Center"/>
-                                        <TextBlock Text=" R$" FontSize="24" VerticalAlignment="Center"/>
-                                    </StackPanel>
-
-                                </Grid>
-                            </Grid>
-                        </DataTemplate>
-                    </phone:LongListSelector.ItemTemplate>
-                </phone:LongListSelector>
+                            </DataTemplate>
+                        </phone:LongListSelector.ItemTemplate>
+                    </phone:LongListSelector>
 
 
 
-                <TextBlock Text="todos os produtos" Style="{StaticResource PhoneTextExtraLargeStyle}" Grid.Row="1" Margin="0"/>
-                
-            </Grid>
+                    <TextBlock Text="todos os produtos" Style="{StaticResource PhoneTextExtraLargeStyle}" Grid.Row="1" Margin="0"/>
+
+                </Grid>
+            </ScrollViewer>
         </phone:PanoramaItem>
 
     </phone:Panorama>

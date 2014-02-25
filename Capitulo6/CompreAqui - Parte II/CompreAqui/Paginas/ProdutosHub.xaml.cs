@@ -32,7 +32,9 @@ namespace CompreAqui.Paginas
                                           Descricao = produtos.Categoria.Descricao
                                       }).Distinct().ToList();
 
-            Promocoes.ItemsSource = Loja.Dados.Produtos.Where(produto => produto.PrecoPromocao != 0).ToList();
+            Promocoes.ItemsSource = Loja.Dados.Produtos.Where(produto => produto.PrecoPromocao != 0)
+                                                       .OrderByDescending(produto => produto.Desconto)
+                                                       .ToList();
             Produtos.ItemsSource = Loja.Dados.Produtos.Skip(2).Take(2).ToList();
         }
     }
