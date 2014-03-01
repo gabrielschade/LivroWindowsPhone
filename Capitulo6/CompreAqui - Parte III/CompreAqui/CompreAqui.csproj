@@ -123,6 +123,8 @@
     </Compile>
     <Compile Include="Resources\BancoDados.cs" />
     <Compile Include="Transition\HybridOrientationChangesFrame.cs" />
+    <Compile Include="ViewModels\CategoriaVM.cs" />
+    <Compile Include="ViewModels\ProdutoVM.cs" />
     <Compile Include="ViewModels\UsuarioVM.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
   </ItemGroup>

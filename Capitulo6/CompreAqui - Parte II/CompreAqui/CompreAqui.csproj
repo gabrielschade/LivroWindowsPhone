@@ -121,6 +121,9 @@
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Transition\HybridOrientationChangesFrame.cs" />
+    <Compile Include="ViewModels\CategoriaVM.cs" />
+    <Compile Include="ViewModels\ProdutoVM.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using CompreAqui.Modelos;
+using CompreAqui.ViewModels;
 
 namespace CompreAqui.Paginas
 {
@@ -21,7 +22,19 @@ namespace CompreAqui.Paginas
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            List<Produto> produtos = Loja.Dados.Produtos;
+
+            List<ProdutoVM> produtos = (from produto in Loja.Dados.Produtos
+                                        select new ProdutoVM
+                                        {
+                                            Id = produto.Id,
+                                            Descricao = produto.Descricao,
+                                            Preco = produto.Preco,
+                                            PrecoPromocao = produto.PrecoPromocao,
+                                            AvaliacaoMedia = produto.AvaliacaoMedia,
+                                            CategoriaId = produto.Categoria.Id,
+                                            Icone = produto.Icone
+                                        }).ToList();
+
             string categoria, categoriaId;
 
             NavigationContext.QueryString.TryGetValue("categoria", out categoria);
@@ -31,7 +44,7 @@ namespace CompreAqui.Paginas
                 Titulo.Text = categoria.ToLower();
 
             if (!string.IsNullOrEmpty(categoriaId))
-                produtos = produtos.Where(produto => produto.Categoria.Id == Convert.ToInt32(categoriaId)).ToList();
+                produtos = produtos.Where(produto => produto.CategoriaId == Convert.ToInt32(categoriaId)).ToList();
 
             Listagem.ItemsSource = produtos;
         }

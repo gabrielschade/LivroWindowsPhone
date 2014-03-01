@@ -16,20 +16,6 @@ namespace CompreAqui.Modelos
 
         public double PrecoPromocao { get; set; }
 
-        public double PrecoAPagar
-        {
-            get
-            {
-                double valor;
-                if (PrecoPromocao != 0)
-                    valor = PrecoPromocao;
-                else
-                    valor = Preco;
-
-                return Math.Round(valor, 2);
-            }
-        }
-
         public string DescricaoDetalhada { get; set; }
 
         public double AvaliacaoMedia { get; set; }
@@ -37,13 +23,5 @@ namespace CompreAqui.Modelos
         public Categoria Categoria { get; set; }
 
         public string Icone { get; set; }
-
-        public double Desconto
-        {
-            get
-            {
-                return Math.Round(100 - (PrecoPromocao * 100 / Preco), 2);
-            }
-        }
     }
 }

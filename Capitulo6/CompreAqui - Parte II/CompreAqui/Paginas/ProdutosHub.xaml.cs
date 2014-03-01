@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using CompreAqui.Modelos;
+using CompreAqui.ViewModels;
 
 namespace CompreAqui.Paginas
 {
@@ -26,16 +27,34 @@ namespace CompreAqui.Paginas
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             Categorias.ItemsSource = (from produtos in Loja.Dados.Produtos
-                                      select new
+                                      select new CategoriaVM
                                       {
                                           Id = produtos.Categoria.Id,
                                           Descricao = produtos.Categoria.Descricao
                                       }).Distinct().ToList();
 
-            Promocoes.ItemsSource = Loja.Dados.Produtos.Where(produto => produto.PrecoPromocao != 0)
-                                                       .OrderByDescending(produto => produto.Desconto)
-                                                       .ToList();
-            Produtos.ItemsSource = Loja.Dados.Produtos.Skip(2).Take(2).ToList();
+            Promocoes.ItemsSource = (from produtos in Loja.Dados.Produtos
+                                     where produtos.PrecoPromocao != 0
+                                     select new ProdutoVM
+                                     {
+                                         Id = produtos.Id,
+                                         Descricao = produtos.Descricao,
+                                         Preco = produtos.Preco,
+                                         PrecoPromocao = produtos.PrecoPromocao,
+                                         Icone = produtos.Icone
+                                     }).OrderByDescending(produto => produto.Desconto)
+                                       .ToList();
+
+            Produtos.ItemsSource = (from produtos in Loja.Dados.Produtos
+                                    where produtos.Id == 3 || produtos.Id == 4
+                                    select new ProdutoVM
+                                    {
+                                        Id = produtos.Id,
+                                        Descricao = produtos.Descricao,
+                                        Icone = produtos.Icone,
+                                        Preco = produtos.Preco,
+                                        PrecoPromocao = produtos.PrecoPromocao
+                                    }).ToList();
         }
     }
 }
