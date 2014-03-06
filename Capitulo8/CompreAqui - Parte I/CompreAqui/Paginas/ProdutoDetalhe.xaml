@@ -10,7 +10,7 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait" Orientation="Portrait"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
 
@@ -26,55 +26,56 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="produto" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <StackPanel Grid.Row="0" Margin="8,17,0,28">
+            <TextBlock Text="{Binding Path=Descricao}" TextWrapping="Wrap" Style="{StaticResource PhoneTextTitle1Style}" Margin="0"/>
         </StackPanel>
 
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="10,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="230"/>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Row="1" Margin="10,0">
+            <Grid x:Name="ContentPanel" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="230"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <Grid Background="White">
-                <Grid.Resources>
-                    <converter:ImageSourceConverter x:Key="converter"/>
-                </Grid.Resources>
-                <Image Source="{Binding Path=Icone,Converter={StaticResource converter}}" Height="140" />
+                <Grid Background="White">
+                    <Grid.Resources>
+                        <converter:ImageSourceConverter x:Key="converter"/>
+                    </Grid.Resources>
+                    <Image Source="{Binding Path=Icone,Converter={StaticResource converter}}" Height="140" />
+                </Grid>
+
+                <StackPanel Grid.Column="1" Margin="10">
+                    <StackPanel.Resources>
+                        <converter:VisibilityConverter x:Key="converter"/>
+                    </StackPanel.Resources>
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding Path=PrecoPromocao, Converter={StaticResource converter}}">
+                        <TextBlock Text="de:" Style="{StaticResource PhoneTextLargeStyle}" Margin="5,0"/>
+                        <TextBlock Text="{Binding Preco}" Style="{StaticResource PhoneTextLargeStyle}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="por:" Style="{StaticResource PhoneTextExtraLargeStyle}" Margin="5,0"/>
+                        <TextBlock Text="{Binding PrecoAPagar}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,30">
+                        <TextBlock Text="Avaliação:" Style="{StaticResource PhoneTextLargeStyle}" Margin="5,0"/>
+                        <TextBlock Text="{Binding AvaliacaoMedia}" Style="{StaticResource PhoneTextLargeStyle}"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10">
+                    <TextBlock Text="Categoria:" Style="{StaticResource PhoneTextLargeStyle}" Margin="0"/>
+                    <TextBlock Text="{Binding CategoriaDescricao}" Style="{StaticResource PhoneTextLargeStyle}"/>
+                </StackPanel>
+
+                <TextBlock Text="{Binding DescricaoDetalhada}" Grid.Row="3" Grid.ColumnSpan="2" TextWrapping="Wrap"/>
+
             </Grid>
-
-            <StackPanel Grid.Column="1" Margin="10">
-                <StackPanel.Resources>
-                    <converter:VisibilityConverter x:Key="converter"/>
-                </StackPanel.Resources>
-                <StackPanel Orientation="Horizontal" Visibility="{Binding Path=PrecoPromocao, Converter={StaticResource converter}}">
-                    <TextBlock Text="de:" Style="{StaticResource PhoneTextLargeStyle}" Margin="5,0"/>
-                    <TextBlock Text="{Binding Preco}" Style="{StaticResource PhoneTextLargeStyle}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="por:" Style="{StaticResource PhoneTextExtraLargeStyle}" Margin="5,0"/>
-                    <TextBlock Text="{Binding PrecoAPagar}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,30">
-                    <TextBlock Text="Avaliação:" Style="{StaticResource PhoneTextLargeStyle}" Margin="5,0"/>
-                    <TextBlock Text="{Binding AvaliacaoMedia}" Style="{StaticResource PhoneTextLargeStyle}"/>
-                </StackPanel>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10">
-                <TextBlock Text="Categoria:" Style="{StaticResource PhoneTextLargeStyle}" Margin="0"/>
-                <TextBlock Text="{Binding CategoriaDescricao}" Style="{StaticResource PhoneTextLargeStyle}"/>
-            </StackPanel>
-
-            <TextBlock Text="{Binding DescricaoDetalhada}" Grid.Row="3" Grid.ColumnSpan="2" TextWrapping="Wrap"/>
-
-        </Grid>
+        </ScrollViewer>
     </Grid>
 
 </phone:PhoneApplicationPage>

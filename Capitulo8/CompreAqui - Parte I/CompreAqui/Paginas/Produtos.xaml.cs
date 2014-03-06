@@ -35,18 +35,40 @@ namespace CompreAqui.Paginas
                                             Icone = produto.Icone
                                         }).ToList();
 
-            string categoria, categoriaId;
+            string titulo, categoriaId, pesquisa;
 
-            NavigationContext.QueryString.TryGetValue("categoria", out categoria);
+            NavigationContext.QueryString.TryGetValue("titulo", out titulo);
             NavigationContext.QueryString.TryGetValue("categoriaId", out categoriaId);
+            NavigationContext.QueryString.TryGetValue("pesquisa", out pesquisa);
 
-            if (!string.IsNullOrEmpty(categoria))
-                Titulo.Text = categoria.ToLower();
+            if (!string.IsNullOrEmpty(titulo))
+                Titulo.Text = titulo.ToLower();
 
             if (!string.IsNullOrEmpty(categoriaId))
                 produtos = produtos.Where(produto => produto.CategoriaId == Convert.ToInt32(categoriaId)).ToList();
 
+            if (!string.IsNullOrEmpty(pesquisa))
+                produtos = produtos.Where(produto => produto.Descricao.ToLower().Contains(pesquisa.ToLower())).ToList();
+
             Listagem.ItemsSource = produtos;
+            if (produtos.Count == 0)
+            {
+                CampoMensagem.Visibility = System.Windows.Visibility.Visible;
+            }
         }
+
+        private void Produto_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            Grid componentePressionado = sender as Grid;
+            if (componentePressionado != null)
+            {
+                string id = Convert.ToString(componentePressionado.Tag);
+                string parametros = string.Format("?id={0}", id);
+
+                NavigationService.Navigate(new Uri(string.Concat("/Paginas/ProdutoDetalhe.xaml", parametros), UriKind.Relative));
+            }
+        }
+
+
     }
 }

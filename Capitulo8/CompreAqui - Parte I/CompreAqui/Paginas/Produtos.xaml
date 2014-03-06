@@ -43,11 +43,13 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="10">
+            <StackPanel>
+                <TextBlock x:Name="CampoMensagem" Text="Não foi encontrado nenhum produto com o filtro inserido" Visibility="Collapsed" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" Margin="0,20"/>
             <ScrollViewer>
                 <phone:LongListSelector x:Name="Listagem">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
-                            <Grid Height="150" Background="#4C000000" VerticalAlignment="Top" Margin="0,5">
+                            <Grid Tap="Produto_Tap" Tag="{Binding Id}" Height="150" Background="#4C000000" VerticalAlignment="Top" Margin="0,5">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="110"/>
                                     <ColumnDefinition Width="*"/>
@@ -79,6 +81,7 @@
 
 
             </ScrollViewer>
+            </StackPanel>
         </Grid>
 
     </Grid>

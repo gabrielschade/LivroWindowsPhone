@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using CompreAqui.Auxiliar;
 using Newtonsoft.Json;
 using CompreAqui.ViewModels;
+using System.Windows.Input;
 
 namespace CompreAqui.Paginas
 {
@@ -127,9 +128,61 @@ namespace CompreAqui.Paginas
 
             string categoria = categoriaClicada.Text;
             string categoriaId = Convert.ToString(categoriaClicada.Tag);
-            string parametros = string.Format("?categoria={0}&categoriaId={1}", categoria, categoriaId);
+            string parametros = string.Format("?titulo={0}&categoriaId={1}", categoria, categoriaId);
 
             NavigationService.Navigate(new Uri(string.Concat("/Paginas/Produtos.xaml", parametros), UriKind.Relative));
+        }
+
+        private void Produto_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            Grid componentePressionado = sender as Grid;
+            if (componentePressionado != null)
+            {
+                string id = Convert.ToString(componentePressionado.Tag);
+                string parametros = string.Format("?id={0}", id);
+
+                NavigationService.Navigate(new Uri(string.Concat("/Paginas/ProdutoDetalhe.xaml", parametros), UriKind.Relative));
+            }
+        }
+
+        private void ApplicationBarIconButton_Click(object sender, EventArgs e)
+        {
+            if (PainelPesquisa.Visibility == System.Windows.Visibility.Collapsed)
+            {
+                PainelPesquisa.Visibility = System.Windows.Visibility.Visible;
+                CampoPesquisa.Focus();
+            }
+            else
+            {
+                ExecutarPesquisa(); 
+            }
+        }
+
+        private void CampoPesquisa_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key.Equals(Key.Enter))
+            {
+                ExecutarPesquisa();
+            }
+        }
+
+        private void ExecutarPesquisa()
+        {
+            string parametros = string.Format("?titulo={0}&pesquisa={1}", "resultados", CampoPesquisa.Text);
+
+            NavigationService.Navigate(new Uri(string.Concat("/Paginas/Produtos.xaml", parametros), UriKind.Relative));
+            DesaparecerPainelPesquisa();
+        }
+
+        private void CampoPesquisa_LostFocus(object sender, RoutedEventArgs e)
+        {
+            DesaparecerPainelPesquisa();
+        }
+
+        private void DesaparecerPainelPesquisa()
+        {
+            CampoPesquisa.Text = string.Empty;
+            PainelPesquisa.Visibility = System.Windows.Visibility.Collapsed;
         }
 
     }
