@@ -1,0 +1,109 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="CompreAqui.Paginas.Produtos"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:converter="clr-namespace:CompreAqui.Converter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideUpFadeIn" />
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideUpFadeIn" />
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush Stretch="None" ImageSource="/Assets/Images/panoramaBackground.jpg"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="produtos" Style="{StaticResource PhoneTextTitle1Style}" x:Name="Titulo"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="10">
+            <ScrollViewer>
+                <StackPanel>
+                    <TextBlock x:Name="CampoMensagem" Text="Não foi encontrado nenhum produto com o filtro inserido" Visibility="Collapsed" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" Margin="0,20"/>
+                    <ProgressBar x:Name="BarraProgresso"  IsIndeterminate="True" Visibility="Collapsed" Foreground="Blue"/>
+                    <phone:LongListSelector x:Name="Listagem">
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Tap="Produto_Tap" Tag="{Binding Id}" Height="150" Background="#4C000000" VerticalAlignment="Top" Margin="0,5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="110"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Background="White">
+                                        <Grid.Resources>
+                                            <converter:ImageSourceConverter x:Key="converter"/>
+                                        </Grid.Resources>
+                                        <Image Source="{Binding Path=Icone,Converter={StaticResource converter}}" Height="75" />
+                                    </Grid>
+                                    <StackPanel Grid.Column="1" Margin="10">
+                                        <TextBlock Text="{Binding Path=Descricao}" FontSize="{StaticResource PhoneFontSizeLarge}" TextWrapping="Wrap"/>
+
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="por: " VerticalAlignment="Center"/>
+                                            <TextBlock Text="{Binding Path=PrecoAPagar}" FontSize="24" VerticalAlignment="Center"/>
+                                            <TextBlock Text=" R$" FontSize="24" VerticalAlignment="Center"/>
+                                            <TextBlock Text="Avaliação média: "  VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                            <TextBlock Text="{Binding Path=AvaliacaoMedia}" FontSize="24" VerticalAlignment="Center"/>
+                                        </StackPanel>
+
+                                    </StackPanel>
+
+                                </Grid>
+                            </DataTemplate>
+                        </phone:LongListSelector.ItemTemplate>
+                    </phone:LongListSelector>
+
+
+
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+
+    </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar Opacity="0.5">
+            <shell:ApplicationBarIconButton
+                Text="Fixar"
+                IconUri="/Assets/AppBar/favs.addto.png"
+                Click="AddTo_Click"
+                />
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem
+                    x:Name="PaginaInicialItemMenu"
+                    Text="ir para a página inicial"
+                    Click="Home_Click"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+
+</phone:PhoneApplicationPage>

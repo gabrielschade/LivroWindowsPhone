@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CompreAqui.Auxiliar;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,5 +30,12 @@ namespace CompreAqui.Modelos
         }
 
         public List<Produto> Produtos { get; set; }
+
+        public async Task CarregarDadosAsync()
+        {
+            string dados = LeitorArquivo.Ler("/CompreAqui;component/Resources/dados.txt");
+            Loja.Dados = JsonConvert.DeserializeObject<Loja>(dados);
+            await Task.Delay(3000);
+        }
     }
 }

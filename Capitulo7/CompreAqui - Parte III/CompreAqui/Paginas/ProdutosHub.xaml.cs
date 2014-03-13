@@ -42,20 +42,34 @@ namespace CompreAqui.Paginas
         {
             base.OnNavigatedTo(e);
 
+            CarregarDadosAsync();
+        }
+
+        private async void CarregarDadosAsync()
+        {
             if (Loja.Dados.Produtos == null)
             {
-
-                Task thread = CarregarDados();
-                thread.ContinueWith(
-                (resultado) =>
-                {
-                    Dispatcher.BeginInvoke(VincularDados);
-                });
+                AlterarCamposCarregando(System.Windows.Visibility.Visible);
+                await Loja.Dados.CarregarDadosAsync();
+                VincularDados();
             }
             else
             {
                 VincularDados();
             }
+
+            AlterarCamposCarregando(System.Windows.Visibility.Collapsed);
+        }
+
+        private void AlterarCamposCarregando(Visibility visibility)
+        {
+            CampoMensagem1.Visibility = visibility;
+            CampoMensagem2.Visibility = visibility;
+            CampoMensagem3.Visibility = visibility;
+
+            BarraProgresso1.Visibility = visibility;
+            BarraProgresso2.Visibility = visibility;
+            BarraProgresso3.Visibility = visibility;
         }
 
         private void VincularDados()
@@ -91,12 +105,7 @@ namespace CompreAqui.Paginas
                                     }).ToList();
         }
 
-        private async Task CarregarDados()
-        {
-            string dados = LeitorArquivo.Ler("/CompreAqui;component/Resources/dados.txt");
-            Loja.Dados = JsonConvert.DeserializeObject<Loja>(dados);
-            await Task.Delay(3000);
-        }
+        
 
         private void PhoneApplicationPage_BackKeyPress(object sender, System.ComponentModel.CancelEventArgs e)
         {
