@@ -27,13 +27,14 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="8,17,0,28">
-            <TextBlock Text="{Binding Path=Descricao,Mode=TwoWay}" TextWrapping="Wrap" Style="{StaticResource PhoneTextTitle1Style}" Margin="0" x:Name="txtTitulo"/>
+            <TextBlock Text="{Binding Path=Descricao, Mode=TwoWay}" TextWrapping="Wrap" Style="{StaticResource PhoneTextTitle1Style}" Margin="0" x:Name="txtTitulo"/>
         </StackPanel>
 
         <ScrollViewer Grid.Row="1" Margin="10,0">
             <StackPanel>
                 <TextBlock x:Name="CampoMensagem" Text="Não foi encontrado nenhum produto com o filtro inserido" Visibility="Collapsed" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" Margin="0,20"/>
                 <ProgressBar x:Name="BarraProgresso"  IsIndeterminate="True" Visibility="Collapsed" Foreground="Blue"/>
+
                 <Grid x:Name="PainelConteudo" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="230"/>
@@ -88,6 +89,11 @@
                 Text="Fixar"
                 IconUri="/Assets/AppBar/favs.addto.png"
                 Click="AddTo_Click"
+                />
+            <shell:ApplicationBarIconButton
+                Text="Compartilhar"
+                IconUri="/Assets/AppBar/share.png"
+                Click="Share_Click"
                 />
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem

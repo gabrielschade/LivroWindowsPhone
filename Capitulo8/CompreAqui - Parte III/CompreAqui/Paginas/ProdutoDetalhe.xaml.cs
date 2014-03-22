@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using CompreAqui.Modelos;
 using CompreAqui.ViewModels;
 using System.Text;
+using Microsoft.Phone.Tasks;
 
 namespace CompreAqui.Paginas
 {
@@ -130,6 +131,18 @@ namespace CompreAqui.Paginas
         private void Home_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+        }
+
+        private void Share_Click(object sender, EventArgs e)
+        {
+            ProdutoVM dataContext = DataContext as ProdutoVM;
+            ShareStatusTask launcherCompartilhar = new ShareStatusTask();
+            launcherCompartilhar.Status = 
+                string.Concat("Confiram o produto ", dataContext.Descricao, 
+                              " no aplicativo CompreAqui, está custando apenas ", 
+                              dataContext.PrecoAPagar, " R$.");
+
+            launcherCompartilhar.Show();
         }
 
     }
