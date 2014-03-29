@@ -87,13 +87,13 @@
             <shell:ApplicationBarIconButton
                 Text="Fixar"
                 IconUri="/Assets/AppBar/favs.addto.png"
-                Click="AddTo_Click"
+                Click="Fixar_Click"
                 />
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem
                     x:Name="PaginaInicialItemMenu"
                     Text="ir para a página inicial"
-                    Click="Home_Click"/>
+                    Click="PaginaInicial_Click"/>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

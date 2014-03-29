@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -86,7 +86,7 @@ namespace CompreAqui.Paginas
             }
         }
 
-        private void AddTo_Click(object sender, EventArgs e)
+        private void Fixar_Click(object sender, EventArgs e)
         {
             StringBuilder parametros = null;
 
@@ -128,12 +128,12 @@ namespace CompreAqui.Paginas
             return data;
         }
 
-        private void Home_Click(object sender, EventArgs e)
+        private void PaginaInicial_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
 
-        private void Share_Click(object sender, EventArgs e)
+        private void Compartilhar_Click(object sender, EventArgs e)
         {
             ProdutoVM dataContext = DataContext as ProdutoVM;
             ShareStatusTask launcherCompartilhar = new ShareStatusTask();

@@ -1,0 +1,124 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="CompreAqui.Paginas.ProdutoDetalhe"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converter="clr-namespace:CompreAqui.Converter"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideUpFadeIn" />
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideUpFadeIn" />
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush Stretch="None" ImageSource="/Assets/Images/panoramaBackground.jpg"/>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="8,17,0,28">
+            <TextBlock Text="{Binding Path=Descricao, Mode=TwoWay}" TextWrapping="Wrap" Style="{StaticResource PhoneTextTitle1Style}" Margin="0" x:Name="txtTitulo"/>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" Margin="10,0">
+            <StackPanel>
+                <TextBlock x:Name="CampoMensagem" Text="Não foi encontrado nenhum produto com o filtro inserido" Visibility="Collapsed" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" Margin="0,20"/>
+                <ProgressBar x:Name="BarraProgresso"  IsIndeterminate="True" Visibility="Collapsed" Foreground="Blue"/>
+
+                <Grid x:Name="PainelConteudo" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="230"/>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Background="White">
+                        <Grid.Resources>
+                            <converter:ImageSourceConverter x:Key="converter"/>
+                        </Grid.Resources>
+                        <Image Source="{Binding Path=Icone,Converter={StaticResource converter}}" Height="140" />
+                    </Grid>
+
+                    <StackPanel Grid.Column="1" Margin="10">
+                        <StackPanel.Resources>
+                            <converter:VisibilityConverter x:Key="converter"/>
+                        </StackPanel.Resources>
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding Path=PrecoPromocao, Converter={StaticResource converter}}">
+                            <TextBlock Text="de:" Style="{StaticResource PhoneTextLargeStyle}" Margin="5,0"/>
+                            <TextBlock Text="{Binding Preco}" Style="{StaticResource PhoneTextLargeStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="por:" Style="{StaticResource PhoneTextExtraLargeStyle}" Margin="5,0"/>
+                            <TextBlock Text="{Binding PrecoAPagar}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,30">
+                            <TextBlock Text="Avaliação:" Style="{StaticResource PhoneTextLargeStyle}" Margin="5,0"/>
+                            <TextBlock Text="{Binding AvaliacaoMedia}" Style="{StaticResource PhoneTextLargeStyle}"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10">
+                        <TextBlock Text="Categoria:" Style="{StaticResource PhoneTextLargeStyle}" Margin="0"/>
+                        <TextBlock Text="{Binding CategoriaDescricao}" Style="{StaticResource PhoneTextLargeStyle}"/>
+                    </StackPanel>
+
+                    <TextBlock Text="{Binding DescricaoDetalhada}" Grid.Row="3" Grid.ColumnSpan="2" TextWrapping="Wrap"/>
+
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar Opacity="0.5">
+            <shell:ApplicationBarIconButton
+                Text="Fixar"
+                IconUri="/Assets/AppBar/favs.addto.png"
+                Click="Fixar_Click"
+                />
+            <shell:ApplicationBarIconButton
+                Text="Compartilhar"
+                IconUri="/Assets/AppBar/share.png"
+                Click="Compartilhar_Click"
+                />
+            <shell:ApplicationBarIconButton
+                Text="comprar"
+                IconUri="/Assets/Images/Icon.png"
+                Click="Comprar_Click"
+                />
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem
+                    x:Name="PaginaInicialItemMenu"
+                    Text="ir para a página inicial"
+                    Click="PaginaInicial_Click"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>

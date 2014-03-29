@@ -54,17 +54,13 @@
                 </StackPanel>
             </phone:PivotItem>
 
-            <phone:PivotItem Header="Entrega">
-                <Grid/>
-            </phone:PivotItem>
-
         </phone:Pivot>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar Opacity="0.5" Mode="Minimized">
             <shell:ApplicationBarIconButton
-                Text="Desconectar"
+                Text="Sair"
                 IconUri="/Assets/AppBar/back.png"
                 Click="ApplicationBarIconButton_Click"
                 />

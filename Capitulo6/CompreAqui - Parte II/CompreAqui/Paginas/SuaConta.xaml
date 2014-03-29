@@ -43,10 +43,6 @@
                     <Button>Alterar Senha</Button>
                 </StackPanel>
             </phone:PivotItem>
-
-            <phone:PivotItem Header="Entrega">
-                <Grid/>
-            </phone:PivotItem>
             
         </phone:Pivot>
     </Grid>
