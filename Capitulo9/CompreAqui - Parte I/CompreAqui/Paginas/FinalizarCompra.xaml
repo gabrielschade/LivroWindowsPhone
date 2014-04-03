@@ -13,7 +13,9 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    Loaded="PhoneApplicationPage_Loaded"
+    >
 
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
@@ -41,35 +43,35 @@
         </StackPanel>
 
         <ScrollViewer Grid.Row="1">
-                <StackPanel>
-                    <TextBlock Style="{StaticResource PhoneTextLargeStyle}">Logradouro</TextBlock>
-                    <TextBox x:Name="Logradouro"/>
-                    <TextBlock Style="{StaticResource PhoneTextLargeStyle}">Cidade</TextBlock>
-                    <TextBox x:Name="Cidade"/>
-                    <Button Tap="LocalizarEndereco_Tap">Localizar Endereço</Button>
+            <StackPanel>
+                <TextBlock Style="{StaticResource PhoneTextLargeStyle}">Logradouro</TextBlock>
+                <TextBox x:Name="Logradouro"/>
+                <TextBlock Style="{StaticResource PhoneTextLargeStyle}">Cidade</TextBlock>
+                <TextBox x:Name="Cidade"/>
+                <Button Tap="AdicionarEndereco_Tap">Adicionar Endereço</Button>
 
-                    <Grid Margin="10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        
-                        <maps:Map LandmarksEnabled="True" PedestrianFeaturesEnabled="True" x:Name="Mapa" Height="400" Grid.ColumnSpan="2"/>
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                        <StackPanel>
-                            <Button Height="90" FontSize="32" Click="AumentarZoom_Click">+</Button>
-                            <Button Height="90" FontSize="32" Click="DiminuirZoom_Click">-</Button>
-                        </StackPanel>
-                    </Grid>
+                    <maps:Map LandmarksEnabled="True" PedestrianFeaturesEnabled="True" x:Name="Mapa" Height="400" Grid.ColumnSpan="2"/>
 
-                    <StackPanel Margin="10,0" Height="70" Orientation="Horizontal">
+                    <StackPanel>
+                        <Button Height="90" FontSize="32" Tap="AumentarZoom_Tap">+</Button>
+                        <Button Height="90" FontSize="32" Tap="DiminuirZoom_Tap">-</Button>
+                    </StackPanel>
+                </Grid>
+
+                <StackPanel Margin="10,0" Height="70" Orientation="Horizontal">
                     <Rectangle Width="50" Height="50" Fill="Red"/>
                     <TextBlock Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Center">Você</TextBlock>
                     <Rectangle Margin="40,0,0,0" Width="50" Height="50" Fill="Blue"/>
                     <TextBlock Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Center">Endereço</TextBlock>
-                    </StackPanel>
-                    <Button>Finalizar Compra</Button>
                 </StackPanel>
+                <Button Tap="FinalizarCompra_Tap">Finalizar Compra</Button>
+            </StackPanel>
         </ScrollViewer>
 
     </Grid>

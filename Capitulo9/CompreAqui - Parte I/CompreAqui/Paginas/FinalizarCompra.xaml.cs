@@ -12,6 +12,8 @@ using System.Windows.Shapes;
 using System.Windows.Media;
 using Microsoft.Phone.Maps.Controls;
 using System.Device.Location;
+using Microsoft.Phone.Maps.Services;
+using System.Threading.Tasks;
 
 namespace CompreAqui.Paginas
 {
@@ -22,10 +24,8 @@ namespace CompreAqui.Paginas
             InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            base.OnNavigatedTo(e);
-
             ObterPosicaoAtual();
         }
 
@@ -36,13 +36,12 @@ namespace CompreAqui.Paginas
 
             try
             {
-                await System.Threading.Tasks.Task.Delay(1000);
                 Geoposition posicaoAtual = await localizador.GetGeopositionAsync();
                 MarcarPosicaoNoMapa(posicaoAtual.Coordinate.Latitude, posicaoAtual.Coordinate.Longitude, Colors.Red);
                 Mapa.Center = new GeoCoordinate(posicaoAtual.Coordinate.Latitude, posicaoAtual.Coordinate.Longitude);
                 Mapa.ZoomLevel = 15.5;
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("Não foi possível encontrar sua localização. Por favor, verifique se suas configurações de localização estão habilitadas.");
             }
@@ -66,12 +65,12 @@ namespace CompreAqui.Paginas
             Mapa.Layers.Add(camada);
         }
 
-        private void AumentarZoom_Click(object sender, RoutedEventArgs e)
+        private void AumentarZoom_Tap(object sender, RoutedEventArgs e)
         {
             AlterarAcumulativoZoom(3);
         }
 
-        private void DiminuirZoom_Click(object sender, RoutedEventArgs e)
+        private void DiminuirZoom_Tap(object sender, RoutedEventArgs e)
         {
             AlterarAcumulativoZoom(-3);
         }
@@ -88,10 +87,43 @@ namespace CompreAqui.Paginas
             Mapa.ZoomLevel = zoomLevelLimite;
         }
 
-        private void LocalizarEndereco_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void AdicionarEndereco_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-
+            BuscarPorEndereco(Logradouro.Text, Cidade.Text);
         }
+
+        private void BuscarPorEndereco(string logradouro, string cidade)
+        {
+            GeocodeQuery pesquisa = new GeocodeQuery();
+            pesquisa.MaxResultCount = 1;
+            pesquisa.SearchTerm = string.Concat(logradouro, ", ", cidade);
+            pesquisa.GeoCoordinate = new GeoCoordinate(0, 0);
+            pesquisa.QueryCompleted += pesquisa_QueryCompleted;
+            pesquisa.QueryAsync();
+
+            Logradouro.Text = string.Empty;
+            Cidade.Text = string.Empty;
+        }
+
+        private void pesquisa_QueryCompleted(object sender, QueryCompletedEventArgs<IList<MapLocation>> e)
+        {
+            if( e.Result.Count >0)
+            {
+                GeoCoordinate coordenadas = e.Result.First().GeoCoordinate;
+                MarcarPosicaoNoMapa(coordenadas.Latitude, coordenadas.Longitude, Colors.Blue);
+            }
+            else
+            {
+                MessageBox.Show("Desculpe, mas o endereço não foi encontrado.");
+            }
+        }
+
+        private void FinalizarCompra_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            MessageBox.Show("Compra efetuada com sucesso!");
+            NavigationService.GoBack();
+        }
+
 
 
     }
